@@ -5,8 +5,8 @@ var studentinfo = {
 		},
 		add : function(page,max) {
 			// add fetch data from form and set to grid..button add/edit click
-			debugger;
-			alert(page)
+			/*debugger;*/
+			/*alert(page)*/
 			var fname = $("#fName").val();
 			var lname = $("#lName").val();
 			var city = $("#city").val();
@@ -20,7 +20,7 @@ var studentinfo = {
 					/* alert("Record Added Successfully"); */
 				}
 			});
-			studentinfo.set();
+			studentinfo.set(page,max);
 			$("#addForm")[0].reset();
 		},
 		edit : function(id) {
@@ -65,21 +65,30 @@ var studentinfo = {
 			});
 			studentinfo.set();
 		},
-		set : function() {
+		set : function(page,max) {
 			// set record to grid...
-
-			/* debugger; */
+			/*debugger;*/
+			/*alert(page);*/
+			if(page==1){ pageid=page }
+			else{
+			var pageid=(page-1)*max+1;
+			}
+			/*debugger; */
 			$.ajax({
 
-				type : "GET",
+				type : "POST",
 				url : "view",
+				data: "page=" +pageid+ "&max=" +max,
 				success : function(data) {
+					/*alert(data);*/
+					var link="";
 					var studentList = "";
 					var header = "";
 					var obj = JSON.parse(data);
 					var length = obj.length;
+					var offset;
 					/* alert(length); */
-					$("#studentlist").html("");
+					$("#studentlist").empty();
 					header = "<tr>";
 					header += "<th colspan=4>Student List </th>"
 						header += "</tr>";
@@ -90,7 +99,7 @@ var studentinfo = {
 					header += "<th colspan=2>Operation</th>";
 					$("#studentlist").append(header);
 					for (var i = 0; i < obj.length; i++) {
-
+						
 						studentList = "<tr>";
 						studentList += "<td>" + obj[i].fName + "</td> ";
 						studentList += "<td>" + obj[i].lName + "</td> ";
@@ -103,13 +112,13 @@ var studentinfo = {
 							+ ")>Delete</a>" + "</td>";
 						studentList += "</tr>";
 						$("#studentlist").append(studentList);
-
+					
 					}
-					/* alert("success"); */
-
+			
 				}
 			});
-			/* $("#formList").hide(); */
+			studentinfo.pagination();
+		
 		},
 		get : function(ele) {
 			// get record from grid...[ele means its delete or edit cell..]
@@ -120,7 +129,6 @@ var studentinfo = {
 
 		gather : function() {
 			// gathere return object when need
-
 		},
 		saveEdit : function() {
 			// its show data grid data
@@ -152,5 +160,45 @@ var studentinfo = {
 		},
 		validate : function() {
 			// form validation
+		},
+		
+		pagination:function()
+		{
+			/*debugger;*/
+			
+			var total=5;
+			
+			
+			$.ajax({
+					
+				type:"GET",
+				url:"viewPagination",
+				success:function(data)		{
+					
+				var num=parseInt(data);
+				alert(num);
+				var page="";
+				page="<tr>"
+				for(var i=1;i<num+1;i++)
+					{
+							$("#page").empty();
+							page+="<td>";
+							page+="<a onclick=studentinfo.set("+i+","+total+")>"+i+" </a>"; 
+							page+="</td>";
+							$("#page").append(page);
+						
+						
+					}
+					page+="</tr>";
+					$("#page").show();
+				
+				}
+			});
+			
 		}
 }
+
+$(document).ready(function(){
+		studentinfo.pagination();
+		
+});

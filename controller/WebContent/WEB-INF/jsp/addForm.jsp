@@ -22,20 +22,11 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/addStudent.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js""></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js""></script>
 </head>
 <body>
-	<%
-				String spageid=request.getParameter("page");  
-				int pageid=Integer.parseInt(spageid);
-				int total=5;
-				if(pageid==1){}
-				else{
-					pageid=pageid-1;
-					pageid=pageid*total+1;
-				}
 	
-	%>
 	<h1>Add Student Form</h1>
 	<!-- <table>
 		<tr>
@@ -53,16 +44,16 @@
 		<tr><td align="center"><input type="button" value="save" onclick="studentinfo.add()"></td></tr>
 			<tr><td><button onclick="doAjax()">demko</button></td></tr>
 </table> -->
-
+<%    int i=1;  int total=3; %>
 	<form:form id="addForm">
 		<table>
 			<tr>
 				<td><form:label path="id"></form:label></td>
-				<td><form:input  path="id" readonly="true" type="hidden"  /></td>
+				<td><form:input path="id" readonly="true" type="hidden" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="fName">Student FirstName:</form:label></td>
-				<td><form:input  path="fName" value="${student.fName}"  /></td>
+				<td><form:input path="fName" value="${student.fName}" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="lName">Student LastName:</form:label></td>
@@ -74,25 +65,24 @@
 			</tr>
 			<tr>
 				<td align="center" colspan="2"><input type="button" id="button"
-					value="save" onclick="studentinfo.add('<%=pageid%>')"></td>
-					
-			</tr>
-
-
+					value="save" onclick="studentinfo.add(<%=i %>,<%=total %>)"></td>
+			</tr> 
 		</table>
 	</form:form>
-
-
+	
 	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-
-
-
-
-	<table border="1" id="studentlist"></table>
-
-
-<a href="add?page=1">1</a>  
-<a href="add?page=2">2</a>  
-<a href="add?page=3">3</a>  
+    
+     
+	<table border="1" >
+	<tbody id="studentlist"></tbody>
+	<!-- <tbody id="page"></tbody> -->
+	</table>
+	<table><tbody id="page"></tbody></table>
+	
+	
+	<!-- href="add?page=2" -->
+	<!-- <a href="add?page=2" >2</a> -->
+	<%-- <a  onclick="studentinfo.set(<%=pageid%>,<%=total%>)" >2</a>
+	<a href="add?page=3" onclick="studentinfo.set(<%=pageid%>,<%=total%>)">3</a> --%>
 </body>
 </html>

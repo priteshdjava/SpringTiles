@@ -60,15 +60,38 @@ public class StudentController {
 
 	}
 
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public @ResponseBody String getListOfStudent() {
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
+	public @ResponseBody String getListOfStudent(@RequestParam("page")int pageId,@RequestParam("max")int total) {
+		
 		Gson gson = new Gson();
-		List<Student> student = service.getAllStudent();
-
+		List<Student> student = service.listOfStudent(pageId-1, total);
+									
 		List<StudentBean> studentbean = new ArrayList<StudentBean>();
-		studentbean = prepareBeanList(service.getAllStudent());
+		studentbean = prepareBeanList(service.listOfStudent(pageId-1, total));
 		String jsonInString = gson.toJson(studentbean);
 		return jsonInString;
+
+	}
+	@RequestMapping(value = "/viewPagination", method = RequestMethod.GET)
+	public @ResponseBody String getListOfPage() {
+		int pageid;
+		Gson gson = new Gson();
+		List<Student> student = service.getAllStudent();
+		pageid=student.size();
+		if(pageid%5==0)
+		{
+			int page=pageid/5;
+			String jsonpageid = gson.toJson(page);
+			return jsonpageid;
+		}
+		else{
+		int page=(pageid/5)+1;
+		String jsonpageid = gson.toJson(page);
+		return jsonpageid;
+		}
+		/*List<StudentBean> studentbean = new ArrayList<StudentBean>();
+		studentbean = prepareBeanList(student);*/
+		
 
 	}
 

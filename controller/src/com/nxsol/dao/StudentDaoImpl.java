@@ -28,7 +28,7 @@ public class StudentDaoImpl implements StudentDao {
 	public List<Student> getAllStudent() {
 		// TODO Auto-generated method stub
 		return (List<Student>) sessionFactory.getCurrentSession().createCriteria(Student.class).list();
-		
+
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class StudentDaoImpl implements StudentDao {
 	public void deleteStudent(Student student) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession()
-				.createQuery("delete from student_detail where sId='" + student.getsId() + "'").executeUpdate();
+		.createQuery("delete from student_detail where sId='" + student.getsId() + "'").executeUpdate();
 	}
 
 	@Override
@@ -68,5 +68,5 @@ public class StudentDaoImpl implements StudentDao {
 		return student;
 	}
 
-	
+
 }

@@ -12,6 +12,9 @@ var studentinfo = {
 			var city = $("#city").val();
 			$.ajax({
 
+				
+				
+				
 				type : "POST",
 				url : "save",
 				data : "fName=" + fname + "&lName=" + lname + "&city=" + city,

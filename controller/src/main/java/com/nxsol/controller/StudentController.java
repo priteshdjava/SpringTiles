@@ -37,7 +37,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addForm(@ModelAttribute("command") StudentBean studentbean) {
-		System.out.println("this is add++++++++++++++++++++");
+		/*System.out.println("this is add++++++++++++++++++++");*/
 		return "addForm";
 	}
 

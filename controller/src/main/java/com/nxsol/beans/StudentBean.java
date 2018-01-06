@@ -9,18 +9,10 @@ public class StudentBean implements Serializable {
 	private String lName;
 	private String city;
 
-	public Integer getId() {
-		return id;
-	}
-
-
-	
-	
 	public String getfName() {
 		return fName;
 		
 	}
-
 	public void setfName(String fName) {
 		this.fName = fName;
 	}
@@ -40,9 +32,12 @@ public class StudentBean implements Serializable {
 	public void setCity(String city) {
 		this.city = city;
 	}
-
+	public int getId() {
+		return id;
+	}
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 }

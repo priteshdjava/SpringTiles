@@ -26,7 +26,7 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js""></script>
 </head>
 <body>
-
+	
 	<h1>Add Student Form</h1>
 	<!-- <table>
 		<tr>
@@ -44,11 +44,11 @@
 		<tr><td align="center"><input type="button" value="save" onclick="studentinfo.add()"></td></tr>
 			<tr><td><button onclick="doAjax()">demko</button></td></tr>
 </table> -->
-	<%    int i=1;  int total=3; %>
+<%    int i=1;  int total=5; %>
 	<form:form id="addForm">
 		<table>
 			<tr>
-				<td><form:label path="id" ></form:label></td>
+				<td><form:label path="id"></form:label></td>
 				<td><form:input path="id" readonly="true" type="hidden" /></td>
 			</tr>
 			<tr>
@@ -66,23 +66,21 @@
 			<tr>
 				<td align="center" colspan="2"><input type="button" id="button"
 					value="save" onclick="studentinfo.add(<%=i %>,<%=total %>)"></td>
-			</tr>
+			</tr> 
 		</table>
 	</form:form>
-
+	
 	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-
-
-	<table border="1">
-		<tbody id="studentlist"></tbody>
-		<tbody id="studentlist1"></tbody>
-		<!-- <tbody id="page"></tbody> -->
+    
+     
+	<table border="1" >
+	<tbody id="studentlist"></tbody>
+	<tbody id="studentlist1"></tbody>
+	<!-- <tbody id="page"></tbody> -->
 	</table>
-	<table>
-		<tbody id="page"></tbody>
-	</table>
-
-
+	<table><tbody id="page"></tbody></table>
+	
+	
 	<!-- href="add?page=2" -->
 	<!-- <a href="add?page=2" >2</a> -->
 	<%-- <a  onclick="studentinfo.set(<%=pageid%>,<%=total%>)" >2</a>
